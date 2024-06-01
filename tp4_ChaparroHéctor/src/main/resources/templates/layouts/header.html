@@ -1,0 +1,60 @@
+!<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"   lang="es">
+
+<body>
+	
+	
+	<header th:fragment="header" id="header" class="mb-4 h-perso">
+		<nav class="navbar navbar-expand-lg bg-body-tertiary">
+		  <div class="container-fluid">
+			<div class="col-8 col-sm-4 col-md-2 " >
+				<img th:src="@{./images/fi-logo.png}" style="width: 10rem;" alt="fiunjulogo">
+				<!-- <p class="h4  text-center" >Facultad de <br> Ingenieria</p>	 -->	
+			</div>
+			
+			<p class="col-3 text-start d-none d-sm-block mb-0" >	Contribuyendo al <br> crecimiento de Jujuy </p>
+			
+		    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		      <span class="navbar-toggler-icon"></span>
+		    </button>
+			
+		    <div class="collapse navbar-collapse  col-7" id="navbarSupportedContent">
+				
+		      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex aling-items-center justify-content-around col-12">
+				
+		        <li class="nav-item">
+		          	<a class="nav-link active" aria-current="page" href="#">Inicio</a>
+		        </li>
+				
+		        <li class="nav-item">
+		          	<a class="nav-link" href="https://www.fi.unju.edu.ar/institucional/reglamentos.html">Acerca de</a>
+		        </li>
+				
+				<li class="nav-item">
+					<a class="nav-link" href="https://www.fi.unju.edu.ar/carreras/carreras-de-grado.html">Carreras</a>
+				</li>
+				
+				<li class="nav-item">
+					<a class="nav-link" href="#noticias">Noticias</a>
+				</li>
+				
+				<li class="nav-item">
+					<a class="nav-link" href="#pie">Contacto</a>
+				</li>
+				
+		      </ul>
+			  
+		    </div>
+		  </div>
+		</nav>
+	</header>
+	
+</body>
+
+
+
+
+
+
+
+</html>
