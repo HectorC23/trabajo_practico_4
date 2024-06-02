@@ -1,7 +1,11 @@
 package ar.edu.unju.fi.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Alumno {
 	
 	
@@ -12,13 +16,13 @@ public class Alumno {
 	private String telefono;
 	private LocalDate fechaDeNacimiento;
 	private String domicilio;
-	private String LU;
+	private long LU;
 	
 
 	public Alumno() {}
 	
 	public Alumno(String dni, String nombre, String apellido, String email, String telefono,
-			LocalDate fechaDeNacimiento, String domicilio, String lU) {
+			LocalDate fechaDeNacimiento, String domicilio, long lU) {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;
@@ -70,6 +74,9 @@ public class Alumno {
 	public LocalDate getFechaDeNacimiento() {
 		return fechaDeNacimiento;
 	}
+	public String getFechaFormateada() {
+        return this.fechaDeNacimiento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
 	public void setFechaDeNacimiento(LocalDate fechaDeNacimiento) {
 		this.fechaDeNacimiento = fechaDeNacimiento;
 	}
@@ -79,10 +86,10 @@ public class Alumno {
 	public void setDomicilio(String domicilio) {
 		this.domicilio = domicilio;
 	}
-	public String getLU() {
+	public long getLU() {
 		return LU;
 	}
-	public void setLU(String lU) {
+	public void setLU(long lU) {
 		LU = lU;
 	}
 	

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"   lang="es">
+	
+	<head data-th-replace="~{/layouts/header :: head}"></head>
+	
+	
+	<body>
+		
+		<header data-th-replace="~{/layouts/header :: header}"></header>
+		
+		<script th:inline="javascript">
+		        /*<![CDATA[*/
+		        let alertMessage = /*[[${alertMessage}]]*/ 'null';
+		        if (alertMessage) {
+		            alert(alertMessage);
+		        }
+		        /*]]>*/
+		    </script>
+
+		<main class="container-fluid">
+			<h2 class="text-center">Listado de Alumno</h2>
+			<div class="container text-end">
+		    	<a type="button" class="btn btn-primary mt-5 b" data-th-href="@{/alumno/formulario}" >Agregar</a>
+			</div>
+			
+			<div class="overflow-x-scroll s">
+			    <table  class="table table-striped align-middle text-center mt-3 mb-5 border border-4 border-primary">
+			        <thead>
+			        <tr>
+			            <th scope="col"> Dni </th>
+			            <th scope="col"> Nombre </th>
+			            <th scope="col"> Apellido </th>
+			            <th scope="col"> Email </th>
+			            <th scope="col"> Telefono </th>
+			            <th scope="col"> Fecha De Nacimiento </th>
+			            <th scope="col"> Domicilio </th>
+			            <th scope="col"> L.U. </th>
+			            <th scope="col"> Opciones </th>
+			        </tr>
+			        </thead>
+			        <tbody>
+			        <tr class="col-2" data-th-each="alum: ${alumnos}" >
+			            <td data-th-text="${alum.dni}"> </td>
+			            <td data-th-text="${alum.nombre}"> </td>
+			            <td data-th-text="${alum.apellido}"> </td>
+			            <td data-th-text="${alum.email}"> </td>
+			            <td data-th-text="${alum.telefono}"> </td>
+						
+			            <td data-th-text="${alum.fechaFormateada}"> </td>
+			            
+						<td data-th-text="${alum.domicilio}"> </td>
+			            <td data-th-text="${alum.LU}"> </td>
+						
+			            <td>
+			                <a type="button" role="button" class="btn btn-warning me-2 b" data-th-href="@{/alumno/modificar/}+${alum.dni}" > Editar </a>
+			                <a type="button" role="button" class="btn btn-danger me-2 b" data-th-href="@{/alumno/eliminar/}+${alum.dni}" > Eliminar </a>
+			            </td>
+						
+			        </tr>
+			        </tbody>
+			    </table>
+			</div>
+		</main>
+		
+		<footer data-th-replace="~{/layouts/footer :: footer}"></footer>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/dist/js/bootstrap.bundle.min.js}" ></script>
+	</body>
+	
+</html>
