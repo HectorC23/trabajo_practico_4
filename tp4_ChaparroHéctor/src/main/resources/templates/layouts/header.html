@@ -39,8 +39,18 @@
 		          	<a class="nav-link" href="https://www.fi.unju.edu.ar/institucional/reglamentos.html">Acerca de</a>
 		        </li>
 				
-				<li class="nav-item b">
-					<a class="nav-link" data-th-href="@{/carrera/listado}" >Carreras</a>
+				<li class="nav-item dropdown b">
+		          	<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Explorar
+		          	</a>
+		          	<ul class="dropdown-menu">
+			          	<li>
+							<a class="nav-link" data-th-href="@{/carrera/listado}" >Carreras</a>
+						</li>
+			          	<li>
+							<a class="nav-link" data-th-href="@{/alumno/listado}" >Alumnos</a>
+						</li>
+		          	</ul>
 				</li>
 				
 				<li class="nav-item b">
