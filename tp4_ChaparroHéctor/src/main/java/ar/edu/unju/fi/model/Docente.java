@@ -1,8 +1,11 @@
 package ar.edu.unju.fi.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Docente {
 	
-	private String legajo;
+	private long legajo;
 	private String nombre;
 	private String apellido;
 	private String email;
@@ -10,7 +13,7 @@ public class Docente {
 	
 	public Docente() {}
 	
-	public Docente(String legajo, String nombre, String apellido, String email, String telefono) {
+	public Docente(long legajo, String nombre, String apellido, String email, String telefono) {
 		super();
 		this.legajo = legajo;
 		this.nombre = nombre;
@@ -25,11 +28,11 @@ public class Docente {
 				+ ", telefono=" + telefono + "]";
 	}
 
-	public String getLegajo() {
+	public long getLegajo() {
 		return legajo;
 	}
 
-	public void setLegajo(String legajo) {
+	public void setLegajo(long legajo) {
 		this.legajo = legajo;
 	}
 

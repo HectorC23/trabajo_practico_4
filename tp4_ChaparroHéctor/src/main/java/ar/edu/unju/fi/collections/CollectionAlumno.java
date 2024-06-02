@@ -52,6 +52,7 @@ public class CollectionAlumno {
 		while(iterator.hasNext()) {
 			if(iterator.next().getDni().equals(dni)) {
 				iterator.remove();
+				break;
 			}
 		}
 	}
