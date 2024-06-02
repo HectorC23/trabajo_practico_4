@@ -1,14 +1,23 @@
-!<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org"   lang="es">
+	
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/dist/css/bootstrap.min.css}"  >
+	<link th:rel="stylesheet" th:href="@{/css/estilos.css}"  >
+	<title data-th-text="${titulo}"></title>
+	
+</head>
+
 
 <body>
-	
-	
-	<header th:fragment="header" id="header" class="mb-4 h-perso">
+	<header th:fragment="header" id="header" class="mb-4 h">
 		<nav class="navbar navbar-expand-lg bg-body-tertiary">
 		  <div class="container-fluid">
 			<div class="col-8 col-sm-4 col-md-2 " >
-				<img th:src="@{./images/fi-logo.png}" style="width: 10rem;" alt="fiunjulogo">
+				<img th:src="@{/images/fi-logo.png}" style="width: 10rem;" alt="fiunjulogo">
 				<!-- <p class="h4  text-center" >Facultad de <br> Ingenieria</p>	 -->	
 			</div>
 			
@@ -22,23 +31,23 @@
 				
 		      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex aling-items-center justify-content-around col-12">
 				
-		        <li class="nav-item">
-		          	<a class="nav-link active" aria-current="page" href="#">Inicio</a>
+		        <li class="nav-item b">
+		          	<a class="nav-link active" aria-current="page" data-th-href="@{/}" >Inicio</a>
 		        </li>
 				
-		        <li class="nav-item">
+		        <li class="nav-item b">
 		          	<a class="nav-link" href="https://www.fi.unju.edu.ar/institucional/reglamentos.html">Acerca de</a>
 		        </li>
 				
-				<li class="nav-item">
-					<a class="nav-link" href="https://www.fi.unju.edu.ar/carreras/carreras-de-grado.html">Carreras</a>
+				<li class="nav-item b">
+					<a class="nav-link" data-th-href="@{/carrera/listado}" >Carreras</a>
 				</li>
 				
-				<li class="nav-item">
+				<li class="nav-item b">
 					<a class="nav-link" href="#noticias">Noticias</a>
 				</li>
 				
-				<li class="nav-item">
+				<li class="nav-item b">
 					<a class="nav-link" href="#pie">Contacto</a>
 				</li>
 				
