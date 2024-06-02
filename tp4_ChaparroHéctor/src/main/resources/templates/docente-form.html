@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"   lang="es">
+	
+	<head data-th-replace="~{/layouts/header :: head}"></head>
+	
+	<body>
+		
+		<header data-th-replace="~{/layouts/header :: header}"></header>
+		<main class="container-fluid d-flex flex-column align-items-center justify-content-center my-5">
+			
+			
+			<div>
+				<h2 class="text-center my-5" data-th-text="${edicion}? 'Modificar Datos' : 'Registrar Docente' "> </h2>
+			</div>
+			
+			    <form th:action="${edicion}?@{/docente/modificar}:@{/docente/guardar} "
+					th:object="${docente}"
+				 	method="post"
+					class="container-fluid py-5 mb-5 row col-6 d-flex flex-column align-items-center rounded-4 border border-4 border-primary f">
+					
+					<div class="mb-3 d-flex align-items-center justify-content-center gap-3 col-8 m-auto" th:if="${edicion}">
+						<label for="legajo" class="form-label col-3" th:if="${edicion}" > Legajo: </label>
+						<input type="number" class="form-control" id="legajo" name="legajo" required th:field="*{legajo}" th:if="${edicion}" th:disabled="${edicion}?true:false" >
+						<input type="number" class="form-control d-none" id="legajo" name="legajo" required th:field="*{legajo}" th:if="${edicion}"  >
+			        </div>
+					
+					<div class="mb-3 d-flex align-items-center justify-content-center gap-3 col-8 m-auto">
+			          <label for="nombre" class="form-label col-3"> Nombre: </label>
+			          <input type="text" class="form-control" id="nombre" name="nombre" required th:field="*{nombre}"  >
+			        </div>
+					
+					<div class="mb-3 d-flex align-items-center justify-content-center gap-3 col-8 m-auto">
+			          <label for="apellido" class="form-label col-3"> Apellido: </label>
+			          <input type="text" class="form-control" id="apellido" name="apellido" required th:field="*{apellido}"  >
+			        </div>
+					
+					<div class="mb-3 d-flex align-items-center justify-content-center gap-3 col-8 m-auto">
+			          <label for="email" class="form-label col-3"> Email: </label>
+			          <input type="email" class="form-control" id="email" name="email" required th:field="*{email}"  >
+			        </div>
+					
+					<div class="mb-3 d-flex align-items-center justify-content-center gap-3 col-8 m-auto">
+			          <label for="telefono" class="form-label col-3"> Telefono: </label>
+			          <input type="text" class="form-control" id="telefono" name="telefono" required th:field="*{telefono}"  >
+			        </div>
+					
+			        <button type="submit" class="btn btn-primary col-5 b" th:text="${edicion}?'Modificar':'Enviar'"></button>
+			    </form>
+
+		</main>
+		<hr class="invisible">
+		<footer th:replace="~{/layouts/footer :: footer}"></footer>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/dist/js/bootstrap.bundle.min.js}" ></script>
+	</body>
+				
+</html>

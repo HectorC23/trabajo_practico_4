@@ -52,6 +52,7 @@ public class CollectionCarrera {
 		while(iterator.hasNext()) {
 			if(iterator.next().getCodigo() == codigoCarrera) {
 				iterator.remove();
+				break;
 			}
 		}
 	}
