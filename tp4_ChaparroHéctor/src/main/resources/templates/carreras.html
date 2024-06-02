@@ -8,6 +8,14 @@
 		
 		<header data-th-replace="~{/layouts/header :: header}"></header>
 		
+		<script th:inline="javascript">
+		        /*<![CDATA[*/
+		        let alertMessage = /*[[${alertMessage}]]*/ 'null';
+		        if (alertMessage) {
+		            alert(alertMessage);
+		        }
+		        /*]]>*/
+		    </script>
 
 		<main class="container-fluid">
 			<h2 class="text-center">Listado de Carreras</h2>
@@ -15,8 +23,8 @@
 		    	<a type="button" class="btn btn-primary mt-5 b" data-th-href="@{/carrera/formulario}" >Agregar</a>
 			</div>
 			
-			<div class="overflow-scroll">
-			    <table  class="table table-striped align-middle text-center mt-3 mb-5 border border-primary">
+			<div class="overflow-x-scroll s">
+			    <table  class="table table-striped align-middle text-center mt-3 mb-5 border border-4 border-primary">
 			        <thead>
 			        <tr>
 			            <th scope="col"> Código</th>

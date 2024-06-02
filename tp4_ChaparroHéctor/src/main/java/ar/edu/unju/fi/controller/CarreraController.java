@@ -55,10 +55,18 @@ public class CarreraController {
 		Carrera carreraEncontrada = new Carrera();
 		boolean edicion = true;
 		carreraEncontrada = CollectionCarrera.searchCarrera(codigo);
-		model.addAttribute("edicion", edicion);
-		model.addAttribute("carrera", carreraEncontrada);
-		model.addAttribute("titulo", "Modificar Carrera");
-		return "carrera-form";
+		
+		if(carreraEncontrada == null) {
+			redirectAttributes.addFlashAttribute("alertMessage", "Carrera no encontrada. Redirigiendo a la lista.");
+            return "redirect:/carrera/listado";
+		} else {
+			model.addAttribute("edicion", edicion);
+			model.addAttribute("carrera", carreraEncontrada);
+			model.addAttribute("titulo", "Modificar Carrera");
+			return "carrera-form";
+		}
+		
+		
 	}
 	
 	@PostMapping("/modificar")

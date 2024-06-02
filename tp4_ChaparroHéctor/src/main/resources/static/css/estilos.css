@@ -30,3 +30,7 @@ input[type="number"]::-webkit-outer-spin-button {
 main .b:hover{
 	box-shadow: 0px 0px 15px -1px rgba(0,0,0,0.87);
 }
+
+.s::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari, Opera */
+}
