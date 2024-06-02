@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"   lang="es">
+	
+	<head data-th-replace="~{/layouts/header :: head}"></head>
+	
+	
+	<body>
+		
+		<header data-th-replace="~{/layouts/header :: header}"></header>
+		
+		<script th:inline="javascript">
+		        /*<![CDATA[*/
+		        let alertMessage = /*[[${alertMessage}]]*/ 'null';
+		        if (alertMessage) {
+		            alert(alertMessage);
+		        }
+		        /*]]>*/
+		    </script>
+
+		<main class="container-fluid">
+			<h2 class="text-center">Listado de Carreras</h2>
+			<div class="container text-end">
+		    	<a type="button" class="btn btn-primary mt-5 b" data-th-href="@{/carrera/formulario}" >Agregar</a>
+			</div>
+			
+			<div class="overflow-x-scroll s">
+			    <table  class="table table-striped align-middle text-center mt-3 mb-5 border border-4 border-primary">
+			        <thead>
+			        <tr>
+			            <th scope="col"> Código</th>
+			            <th scope="col"> Nombre </th>
+			            <th scope="col"> Duración </th>
+			            <th scope="col"> Estado </th>
+			            <th scope="col"> Opciones </th>
+			        </tr>
+			        </thead>
+			        <tbody>
+			        <tr class="col-2" data-th-each="carre: ${carreras}" >
+			            <td data-th-text="${carre.codigo}"> </td>
+			            <td data-th-text="${carre.nombre}"> </td>
+			            <td data-th-text="${carre.cantAnios} + ' años'">  </td>
+			            <td> 
+							<span th:if="${carre.estado}">Activa</span>
+							<span th:if="${!carre.estado}">Inactiva</span>
+						</td>
+			            <td> 
+			                <a type="button" role="button" class="btn btn-warning me-2 b" data-th-href="@{/carrera/modificar/}+${carre.codigo}" > Editar </a>
+			                <a type="button" role="button" class="btn btn-danger me-2 b" data-th-href="@{/carrera/eliminar/}+${carre.codigo}" > Eliminar </a>
+			            </td>
+			        </tr>
+			        </tbody>
+			    </table>
+			</div>
+		</main>
+		
+		<footer data-th-replace="~{/layouts/footer :: footer}"></footer>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/dist/js/bootstrap.bundle.min.js}" ></script>
+	</body>
+	
+</html>

@@ -1,12 +1,36 @@
-.p-cont {
-	background-color: rgba(128, 128, 128, 0.7);
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
-.p-text{
-	color: white;
+.h{
+	transition: all 900ms ease;
+}
+.h:hover {
+	box-shadow: 0px 11px 16px -5px rgba(0,0,0,0.67);
+	
 }
 
-.h-perso{
-	border-bottom: 1px solid black;
+.f{
+	transition: all 600ms ease;
+}
+.f:hover {
+	box-shadow: 0px 0px 29px -1px rgba(0,0,0,0.87);
+	
 }
 
+.b {
+	transition: all 800ms ease;
+}
+
+.b:hover{
+	transform: scale(1.1,1.1);
+}
+main .b:hover{
+	box-shadow: 0px 0px 15px -1px rgba(0,0,0,0.87);
+}
+
+.s::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari, Opera */
+}

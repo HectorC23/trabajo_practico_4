@@ -1,13 +1,18 @@
 package ar.edu.unju.fi.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Carrera {
 	
-	private String codigo;
+	private long codigo;
 	private String nombre;
 	private byte cantAnios;
-	private String estado;
+	private boolean estado;
 	
-	public Carrera(String codigo, String nombre, byte cantAnios, String estado) {
+	public Carrera() {}
+	
+	public Carrera(long codigo, String nombre, byte cantAnios, boolean estado) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
@@ -21,11 +26,11 @@ public class Carrera {
 				+ "]";
 	}
 
-	public String getCodigo() {
+	public long getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(String codigo) {
+	public void setCodigo(long codigo) {
 		this.codigo = codigo;
 	}
 
@@ -45,11 +50,11 @@ public class Carrera {
 		this.cantAnios = cantAnios;
 	}
 
-	public String getEstado() {
+	public boolean getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 	

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"   lang="es">
+	
+	<head data-th-replace="~{/layouts/header :: head}"></head>
+	
+	<body>
+		
+		<header data-th-replace="~{/layouts/header :: header}"></header>
+		<main class="container-fluid d-flex flex-column align-items-center justify-content-center my-5">
+			
+			
+			<div>
+				<h2 class="text-center my-5" data-th-text="${edicion}? 'Modificar Carrera' : 'Nueva Carrera' "> </h2>
+			</div>
+			
+			    <form th:action="${edicion}?@{/carrera/modificar}:@{/carrera/guardar} "
+					th:object="${carrera}"
+				 	method="post"
+					class="container-fluid py-5 mb-5 row col-6 d-flex flex-column align-items-center rounded-4 border border-4 border-primary f">
+				 
+			        <div class="mb-3 d-flex align-items-center justify-content-center col-8 m-auto gap-3">
+			          <label for="codigo" class="form-label"> Código: </label>
+			          <input type="number" class="form-control" id="codigo" name="codigo" required th:field="*{codigo}" th:disabled="${edicion}?true:false" >
+			         <input type="number" class="form-control d-none" id="codigo" name="codigo" required th:field="*{codigo}" th:if="${edicion}"  >
+			        </div>
+					
+					<div class="mb-3 d-flex align-items-center justify-content-center gap-3 col-8 m-auto">
+			          <label for="nombre" class="form-label"> Nombre: </label>
+			          <input type="text" class="form-control" id="nombre" name="nombre" required th:field="*{nombre}"  >
+			        </div>
+					
+					
+					<div class="mb-3 d-flex align-items-center justify-content-center gap-3 col-8 m-auto">
+			          <label for="cantAnios" class="form-label"> Duración: </label>
+			          <input type="number" class="form-control" id="cantAnios" name="cantAnios" required 	th:field="*{cantAnios}" >
+			        </div>
+					
+					
+					<div class="mb-3 d-flex align-items-center justify-content-center gap-3 col-8 m-auto" th:if="${edicion}">
+					  <input class="form-check-input" type="radio" id="estadoActivo" name="estado" value="true" checked th:field="*{estado}" />
+					  <label for="estadoActivo">Activo</label>
+					  
+					  <input class="form-check-input" type="radio" id="estadoInactivo" name="estado" value="false" checked th:field="*{estado}" />
+					  <label for="estadoInactivo">Inactivo</label>
+					  
+			        </div>
+					
+			
+			        <button type="submit" class="btn btn-primary col-5 b" th:text="${edicion}?'Modificar':'Guardar'"></button>
+			    </form>
+
+		</main>
+		<hr class="invisible">
+		<footer th:replace="~{/layouts/footer :: footer}"></footer>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/dist/js/bootstrap.bundle.min.js}" ></script>
+	</body>
+				
+</html>
