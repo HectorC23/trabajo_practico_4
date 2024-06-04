@@ -44,10 +44,39 @@
 							<span th:if="${!carre.estado}">Inactiva</span>
 						</td>
 			            <td> 
+							
 			                <a type="button" role="button" class="btn btn-warning me-2 b" data-th-href="@{/carrera/modificar/}+${carre.codigo}" > Editar </a>
-			                <a type="button" role="button" class="btn btn-danger me-2 b" data-th-href="@{/carrera/eliminar/}+${carre.codigo}" > Eliminar </a>
+							
+							<!-- BOTON QUE LLAMA AL MODAL -->
+							<button type="button" class="btn btn-danger me-2 b" data-bs-toggle="modal" th:attr="data-bs-target=${'#modalEliminar' + carre.codigo}"  >
+							  Eliminar
+							</button>
+							
+							
+							<!-- Modal -->
+							<div class="modal fade" th:id="${'modalEliminar' + carre.codigo}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+							  <div class="modal-dialog">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							      </div>
+							      <div class="modal-body row">
+									<b> ¿Seguro que deseas eliminar esta Carrera?: </b>
+									<p> <b>Nombre de la carrera: </b>	<span data-th-text="*{carre.nombre}">  </span></p>
+							       	
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+									<!-- BOTON ELIMINAR-->
+			                		<a type="button" role="button" class="btn btn-danger me-2 b" data-th-href="@{/carrera/eliminar/}+${carre.codigo}" > Eliminar </a>
+							      </div>
+							    </div>
+							  </div>
+							</div>
 			            </td>
 			        </tr>
+					
 			        </tbody>
 			    </table>
 			</div>
