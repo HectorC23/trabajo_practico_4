@@ -68,6 +68,9 @@ public class CollectionAlumno {
 				a.setApellido(alumno.getApellido());
 				a.setEmail(alumno.getEmail());
 				a.setTelefono(alumno.getTelefono());
+				if(alumno.getFechaDeNacimiento() != null) {
+					a.setFechaDeNacimiento(alumno.getFechaDeNacimiento());
+				}
 				a.setDomicilio(alumno.getDomicilio());
 				a.setLU(alumno.getLU());
 				break;

@@ -46,8 +46,11 @@
 					
 					<div class="mb-3 d-flex align-items-center justify-content-center gap-3 col-8 m-auto">
 			          <label for="fechaDeNacimiento" class="form-label col-3"> Fecha De Nacimiento: </label>
-			          <input th:if="${!edicion}" type="date" class="form-control" id="fechaDeNacimiento" name="fechaDeNacimiento" required th:field="*{fechaDeNacimiento}">
+					  <!--
+					  -->
 					  <input type="text" class="form-control" id="fechaDeNacimiento" name="fechaDeNacimiento"  th:field="*{fechaFormateada}" th:if="${edicion}" disabled >
+			          <input th:if="${!edicion}" type="date" class="form-control" id="fechaDeNacimiento" name="fechaDeNacimiento" th:field="*{fechaDeNacimiento}" th:disabled="${edicion}?true:false">
+			          <input th:if="${edicion}" type="date" class="form-control" id="fechaDeNacimiento" name="fechaDeNacimiento" th:field="*{fechaDeNacimiento}">
 
 			        </div>
 					

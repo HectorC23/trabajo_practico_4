@@ -53,7 +53,35 @@
 						
 			            <td>
 			                <a type="button" role="button" class="btn btn-warning me-2 b" data-th-href="@{/alumno/modificar/}+${alum.dni}" > Editar </a>
-			                <a type="button" role="button" class="btn btn-danger me-2 b" data-th-href="@{/alumno/eliminar/}+${alum.dni}" > Eliminar </a>
+							
+							<!-- BOTON QUE LLAMA AL MODAL -->
+							<button type="button" class="btn btn-danger me-2 b" data-bs-toggle="modal" th:attr="data-bs-target=${'#modalEliminar' + alum.dni}"  >
+							  Eliminar
+							</button>
+							
+							<!-- Modal -->
+							<div class="modal fade" th:id="${'modalEliminar' + alum.dni}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+							  <div class="modal-dialog">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							      </div>
+							      <div class="modal-body row">
+									<b> ¿Seguro que deseas dar de baja a este Alumno?: </b>
+									<p>	<b>DNI: </b> <span data-th-text="*{alum.dni}">  </span></p>
+									<p>	<b>Nombre: </b>	<span data-th-text="*{alum.nombre}">  </span></p>
+									<p>	<b>Apellido: </b>	<span data-th-text="*{alum.apellido}">  </span></p>
+									<p>	<b>LU: </b>	<span data-th-text="*{alum.LU}">  </span></p>
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+									<!-- BOTON ELIMINAR-->
+			                		<a type="button" role="button" class="btn btn-danger me-2 b" data-th-href="@{/alumno/eliminar/}+${alum.dni}" > Eliminar </a>
+							      </div>
+							    </div>
+							  </div>
+							</div>
 			            </td>
 						
 			        </tr>
