@@ -1,0 +1,86 @@
+<html xmlns:th="https://www.thymeleaf.org"   lang="es">
+	
+	<head data-th-replace="~{/layouts/header :: head}"></head>
+	
+	<body>
+		
+		<header data-th-replace="~{/layouts/header :: header}"></header>
+		<main class="container-fluid d-flex flex-column align-items-center justify-content-center my-5">
+			
+			
+			<div>
+				<h2 class="text-center my-5" data-th-text="${edicion}? 'Modificar Datos de la Materia' : 'Crear Materia' "> </h2>
+			</div>
+			
+			    <form th:action="${edicion}?@{/materia/modificar}:@{/materia/guardar} "
+					th:object="${materia}"
+				 	method="post"
+					class="container-fluid py-5 mb-5 row col-6 d-flex flex-column align-items-center rounded-4 border border-4 border-primary f">
+					
+					<div class="mb-3 d-flex align-items-center justify-content-center gap-3 col-8 m-auto" th:if="${edicion}">
+						<label for="codigo" class="form-label col-3" th:if="${edicion}" > Codigo: </label>
+						<input type="number" class="form-control" id="codigo" name="codigo" required th:field="*{codigo}" th:if="${edicion}" th:disabled="${edicion}?true:false" >
+						<input type="number" class="form-control d-none" id="codigo" name="codigo" required th:field="*{codigo}" th:if="${edicion}"  >
+			        </div>
+					
+					<div class="mb-3 d-flex align-items-center justify-content-center gap-3 col-8 m-auto">
+			          <label for="nombre" class="form-label col-3"> Nombre: </label>
+			          <input type="text" class="form-control"  id="nombre" name="nombre" required th:field="*{nombre}"  >
+			        </div>
+					
+					<div class="mb-3 d-flex align-items-center justify-content-center gap-3 col-8 m-auto">
+			          <label for="curso" class="form-label col-3"> Curso: </label>
+			          <input type="number" class="form-control" max="20" id="curso" name="curso" required th:field="*{curso}"  >
+			        </div>
+					
+					<div class="mb-3 d-flex align-items-center justify-content-center gap-3 col-8 m-auto">
+			          <label for="horas" class="form-label col-3"> Horas: </label>
+			          <input type="number" step="1" class="form-control" max="200" id="horas" name="horas" required th:field="*{horas}"  >
+			        </div>
+					
+					<div class="mb-3 d-flex align-items-center justify-content-center gap-3 col-8 m-auto">
+						<label for="modalidad" class="form-label col-3"> Seleccione una modalidad: </label>
+						<select id="modalidad" name="modalidad" class="form-select" aria-label="Default select example">
+						  <option value="" selected disabled> Modalidades </option>
+						  <option th:field="*{modalidad}" selected value="Presencial">Presencial</option>
+						  <option th:field="*{modalidad}" value="Virtual">Virtual</option>
+						  <option th:field="*{modalidad}" value="Presencial-Virtual">Presencial-Virtual</option>
+						</select>
+					</div>
+					
+					<div class="mb-3 d-flex align-items-center justify-content-center gap-3 col-8 m-auto">
+						<label for="legajo" class="form-label col-3"> Seleccione un Docente: </label>
+						<select required id="legajo" name="legajo" class="form-select" aria-label="Default select example" >
+							<option value="" selected disabled> Docentes </option>
+							<div th:if="${!edicion}" data-th-each="doc:${docentes}">
+								<option th:value="${doc.legajo}" data-th-text="${doc.legajo} + ' | ' + ${doc.nombre} + ' ' + ${doc.apellido}" ></option>
+							</div>
+							<div th:if="${edicion}" data-th-each="doc:${docentes}">
+								<option th:selected="${materia.docente.legajo == doc.legajo}" th:value="${doc.legajo}" data-th-text="${doc.legajo} + ' | ' + ${doc.nombre} + ' ' + ${doc.apellido}" ></option>
+							</div>
+						</select>		        
+					</div>
+					
+					<div class="mb-3 d-flex align-items-center justify-content-center gap-3 col-8 m-auto">
+						<label for="codCarrera" class="form-label col-3"> Seleccione una Carrera: </label>
+						<select required id="codCarrera" name="codCarrera" class="form-select" aria-label="Default select example" >
+							<option value="" selected disabled> Carreras </option>
+							<div th:if="${!edicion}" data-th-each="car:${carreras}">
+								<option th:value="${car.codigo}" data-th-text="${car.nombre}" ></option>
+							</div>
+							<div th:if="${edicion}" data-th-each="car:${carreras}">
+								<option th:selected="${materia.carrera.codigo == car.codigo}" th:value="${car.codigo}" data-th-text="${car.nombre}" ></option>
+							</div>
+						</select>		        
+					</div>
+					
+			        <button type="submit" class="btn btn-primary col-5 b" th:text="${edicion}?'Modificar':'Enviar'"></button>
+			    </form>
+
+		</main>
+		<hr class="invisible">
+		<footer th:replace="~{/layouts/footer :: footer}"></footer>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/dist/js/bootstrap.bundle.min.js}" ></script>
+	</body>
+				
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"   lang="es">
+	
+	<head data-th-replace="~{/layouts/header :: head}"></head>
+	
+	
+	<body>
+		
+		<header data-th-replace="~{/layouts/header :: header}"></header>
+		
+		<script th:inline="javascript">
+		        /*<![CDATA[*/
+		        let alertMessage = /*[[${alertMessage}]]*/ 'null';
+		        if (alertMessage) {
+		            alert(alertMessage);
+		        }
+		        /*]]>*/
+		</script>
+
+		<main class="container-fluid">
+			<h2 class="text-center">Listado de Materias</h2>
+			<div class="container text-end">
+				<a type="button" class="btn btn-primary mt-5 b" data-th-href="@{/materia/formulario}" >Agregar</a>
+					
+			</div>
+			
+			<div class="overflow-x-scroll s">
+			    <table  class="table table-striped align-middle text-center mt-3 mb-5 border border-4 border-primary">
+			        <thead>
+			        <tr>
+			            <th scope="col"> Codigo: </th>
+			            <th scope="col"> Nombre </th>
+			            <th scope="col"> Curso </th>
+			            <th scope="col"> Horas </th>
+			            <th scope="col"> Modalidad </th>
+			            <th scope="col"> Docente </th>
+			            <th scope="col"> Carrera </th>
+			            <th scope="col"> Opciones </th>
+			        </tr>
+			        </thead>
+			        <tbody>
+			        <tr  data-th-each="mat: ${materias}" >
+			            <td data-th-text="${mat.codigo}"> </td>
+			            <td data-th-text="${mat.nombre}"> </td>
+			            <td data-th-text="${mat.curso}"> </td>
+			            <td data-th-text="${mat.horas}"> </td>
+			            <td data-th-text="${mat.modalidad}"> </td>
+						<!--
+						-->
+			            <td data-th-text="${mat.docente.nombre} + ' ' +${mat.docente.apellido}"> </td>
+						<td data-th-text="${mat.carrera.nombre}"> </td>
+			            <td>
+							<a type="button" role="button" class="btn btn-warning me-2 b" data-th-href="@{/materia/modificar/}+${mat.codigo}" > Editar </a>
+							
+							<!-- BOTON QUE LLAMA AL MODAL -->
+							<button type="button" class="btn btn-danger me-2 b" data-bs-toggle="modal" th:attr="data-bs-target=${'#modalEliminar' + mat.codigo}"  >
+							  Eliminar
+							</button>
+							
+							<!-- Modal -->
+							<div class="modal fade" th:id="${'modalEliminar' + mat.codigo}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+							  <div class="modal-dialog">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							      </div>
+							      <div class="modal-body row">
+									<b> ¿Seguro que deseas eliminar esta Materia?: </b>
+									<p>	<b>Codigo: </b> <span data-th-text="*{mat.codigo}">  </span></p>
+									<p>	<b>Nombre: </b>	<span data-th-text="*{mat.nombre}">  </span></p>
+									<p>	<b>Curso: </b>	<span data-th-text="*{mat.curso}">  </span></p>
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+									<!-- BOTON ELIMINAR-->
+									<a type="button" role="button" class="btn btn-danger me-2 b" data-th-href="@{/materia/eliminar/}+${mat.codigo}" > Eliminar </a>
+										
+							      </div>
+							    </div>
+							  </div>
+							</div>
+			            </td>
+						
+			        </tr>
+			        </tbody>
+			    </table>
+			</div>
+		</main>
+		
+		<footer data-th-replace="~{/layouts/footer :: footer}"></footer>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/dist/js/bootstrap.bundle.min.js}" ></script>
+	</body>
+	
+</html>
