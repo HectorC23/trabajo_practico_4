@@ -18,6 +18,15 @@
 		</script>
 
 		<main class="container-fluid">
+			
+			<div th:if="${mensaje != ''}" th:classappend="${exito} ? 'alert-success' : 'alert-danger' " class="alert  alert-dismissible fade show text-center z-0" role="alert">
+							
+				<strong>Holy guacamole!</strong> <span data-th-text="${mensaje}"></span>
+					  
+					  
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+						
 			<h2 class="text-center">Listado de Materias</h2>
 			<div class="container text-end">
 				<a type="button" class="btn btn-primary mt-5 b" data-th-href="@{/materia/formulario}" >Agregar</a>

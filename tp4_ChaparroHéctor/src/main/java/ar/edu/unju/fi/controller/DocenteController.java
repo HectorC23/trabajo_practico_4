@@ -25,8 +25,12 @@ public class DocenteController {
 	
 	@GetMapping("/listado")
 	public String getAlumnosPage(Model model) {
+		String mensaje = "";
+		boolean exito = false;
 		model.addAttribute("docentes", CollectionDocente.getDocentes());
 		model.addAttribute("titulo", "Docentes");
+		model.addAttribute("exito", exito);
+		model.addAttribute("mensaje", mensaje);
 		return "docentes";
 	}
 	
@@ -42,10 +46,18 @@ public class DocenteController {
 	@PostMapping("/guardar")
 	public ModelAndView guardarDocente(@ModelAttribute("docente") Docente docente) {
 		ModelAndView modelView = new ModelAndView("docentes");
+		String mensaje = "";
 		Random random = new Random();
 		docente.setLegajo(random.nextInt(9000)+1000);
-		CollectionDocente.addDocente(docente);
+		boolean exito = CollectionDocente.addDocente(docente);
+		if (exito) {
+			mensaje = "El docente se agregó con exito!! ♥";
+		} else {
+			mensaje = "El docente NO se pudo agregar :(";
+		}
 		modelView.addObject("docentes",CollectionDocente.getDocentes());
+		modelView.addObject("exito", exito);
+		modelView.addObject("mensaje", mensaje);
 		return modelView;
 	}
 	
@@ -67,9 +79,23 @@ public class DocenteController {
 	}
 	
 	@PostMapping("/modificar")
-	public String modificarDocente(@ModelAttribute("docente") Docente docente) {
-		CollectionDocente.updateDocente(docente);
-		return "redirect:/docente/listado";
+	public String modificarDocente(@ModelAttribute("docente") Docente docente, Model model) {
+		String mensaje ="";
+		boolean exito = false;
+		try {
+			CollectionDocente.updateDocente(docente);
+			mensaje = "El docente con legajo " + docente.getLegajo() + " fue modificada con éxito";
+			exito = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			mensaje = e.getMessage();
+			e.printStackTrace();
+		}
+		model.addAttribute("docentes", CollectionDocente.getDocentes());
+		model.addAttribute("titulo", "Docentes");
+		model.addAttribute("exito", exito);
+		model.addAttribute("mensaje", mensaje);
+		return "docentes";
 	}
 	
 	@GetMapping("/eliminar/{legajo}")
