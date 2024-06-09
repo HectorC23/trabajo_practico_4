@@ -26,8 +26,12 @@ public class AlumnoController {
 	
 	@GetMapping("/listado")
 	public String getAlumnosPage(Model model) {
+		String mensaje = "";
+		boolean exito = false;
 		model.addAttribute("alumnos", CollectionAlumno.getAlumnos());
 		model.addAttribute("titulo", "Alumnos");
+		model.addAttribute("exito", exito);
+		model.addAttribute("mensaje", mensaje);
 		return "alumnos";
 	}
 	
@@ -44,10 +48,18 @@ public class AlumnoController {
 	@PostMapping("/guardar")
 	public ModelAndView guardarAlumno(@ModelAttribute("alumno") Alumno alumno) {
 		ModelAndView modelView = new ModelAndView("alumnos");
+		String mensaje = "";
 		Random random = new Random();
 		alumno.setLU(random.nextInt(9000) + 1000L);
-		CollectionAlumno.addAlumno(alumno);
+		boolean exito = CollectionAlumno.addAlumno(alumno);
+		if (exito) {
+			mensaje = "El alumno se agregó con exito!! ♥";
+		} else {
+			mensaje = "El alumno NO se pudo agregar :(";
+		}
 		modelView.addObject("alumnos", CollectionAlumno.getAlumnos());
+		modelView.addObject("exito", exito);
+		modelView.addObject("mensaje", mensaje);
 		return modelView;
 	}
 	
@@ -71,9 +83,23 @@ public class AlumnoController {
 	}
 	
 	@PostMapping("/modificar")
-	public String modificarAlumno(@ModelAttribute("alumno") Alumno alumno) {
-		CollectionAlumno.updateAlumno(alumno);
-		return "redirect:/alumno/listado";
+	public String modificarAlumno(@ModelAttribute("alumno") Alumno alumno,Model model) {
+		String mensaje ="";
+		boolean exito = false;
+		try {
+			CollectionAlumno.updateAlumno(alumno);
+			mensaje = "El alumno con DNI " + alumno.getDni() + " fue modificado con éxito";
+			exito = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			mensaje = e.getMessage();
+			e.printStackTrace();
+		}
+		model.addAttribute("alumnos", CollectionAlumno.getAlumnos());
+		model.addAttribute("titulo", "Alumnos");
+		model.addAttribute("exito", exito);
+		model.addAttribute("mensaje", mensaje);
+		return "alumnos";
 	}
 	
 	@GetMapping("/eliminar/{dni}")

@@ -38,8 +38,8 @@ public class CollectionAlumno {
 	 * Function que agrega un obj Alumno al array
 	 * @param(Alumno)
 	 */
-	public static void addAlumno(Alumno alumno) {
-		alumnos.add(alumno);
+	public static boolean addAlumno(Alumno alumno) {
+		return alumnos.add(alumno);
 	}
 	
 	/**
@@ -61,22 +61,30 @@ public class CollectionAlumno {
 	 * Function que modifica un obj del array
 	 * @param(Alumno)
 	 */
-	public static void updateAlumno(Alumno alumno) {
-		for(Alumno a: alumnos) {
-			if(a.getDni().equals(alumno.getDni())) {
-				a.setNombre(alumno.getNombre());
-				a.setApellido(alumno.getApellido());
-				a.setEmail(alumno.getEmail());
-				a.setTelefono(alumno.getTelefono());
-				if(alumno.getFechaDeNacimiento() != null) {
-					a.setFechaDeNacimiento(alumno.getFechaDeNacimiento());
+	public static void updateAlumno(Alumno alumno)throws Exception {
+		boolean encontrado = false;
+		try {
+			for(Alumno a: alumnos) {
+				if(a.getDni().equals(alumno.getDni())) {
+					a.setNombre(alumno.getNombre());
+					a.setApellido(alumno.getApellido());
+					a.setEmail(alumno.getEmail());
+					a.setTelefono(alumno.getTelefono());
+					if(alumno.getFechaDeNacimiento() != null) {
+						a.setFechaDeNacimiento(alumno.getFechaDeNacimiento());
+					}
+					a.setDomicilio(alumno.getDomicilio());
+					a.setLU(alumno.getLU());
+					encontrado= true;
+					break;
 				}
-				a.setDomicilio(alumno.getDomicilio());
-				a.setLU(alumno.getLU());
-				break;
-			} else {
-				System.out.println("Alumno no encontrado // No existe");
-			}
+				if (!encontrado) {
+					throw new Exception ("El alumno con DNI " + alumno.getDni() + " no existe");
+				}
+			} 
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			throw e;
 		}
 	}
 	

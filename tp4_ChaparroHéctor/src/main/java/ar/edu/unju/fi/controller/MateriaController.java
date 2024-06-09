@@ -28,8 +28,12 @@ public class MateriaController {
 
 	@GetMapping("/listado")
 	public String getMateriaPage(Model model) {
+		String mensaje = "";
+		boolean exito = false;
 		model.addAttribute("materias", CollectionMateria.getMaterias());
 		model.addAttribute("titulo", "Materias");
+		model.addAttribute("exito", exito);
+		model.addAttribute("mensaje", mensaje);
 		return "materias";
 	}
 
@@ -49,21 +53,22 @@ public class MateriaController {
 										@RequestParam("legajo") long legajo,
 										@RequestParam("codCarrera") long codCarrera) {
 		
-		System.out.println(codCarrera);
-		System.out.println(legajo);
-		System.out.println(CollectionDocente.findDocente(legajo));
-		System.out.println(CollectionCarrera.searchCarrera(codCarrera));
-		
 		ModelAndView modelView = new ModelAndView("materias");
-		
+		String mensaje = "";
 		Random random = new Random();
 		materia.setCodigo(random.nextLong(9000)+1000);
 		materia.setDocente(CollectionDocente.findDocente(legajo));
 		materia.setCarrera(CollectionCarrera.searchCarrera(codCarrera));
 		
-		CollectionMateria.addMateria(materia);
+		boolean exito = CollectionMateria.addMateria(materia);
+		if (exito) {
+			mensaje = "La Carrera se agregó con exito!! ♥";
+		} else {
+			mensaje = "La carrera NO se pudo agregar :(";
+		}
 		modelView.addObject("materias",CollectionMateria.getMaterias());
-		
+		modelView.addObject("exito", exito);
+		modelView.addObject("mensaje", mensaje);
 		return modelView;
 		
 	}
@@ -94,13 +99,27 @@ public class MateriaController {
 	@PostMapping("/modificar")
 	public String modificarMateria(@ModelAttribute("materia") Materia materia,
 									@RequestParam("legajo") long legajo,
-									@RequestParam("codCarrera") long codCarrera) {
+									@RequestParam("codCarrera") long codCarrera,
+									Model model) {
 									
 		materia.setDocente(CollectionDocente.findDocente(legajo));
 		materia.setCarrera(CollectionCarrera.searchCarrera(codCarrera));
-		System.out.println(materia);
-		CollectionMateria.updateMateria(materia);
-		return "redirect:/materia/listado";
+		String mensaje ="";
+		boolean exito = false;
+		try {
+			CollectionMateria.updateMateria(materia);
+			mensaje = "La mateira con codigo " + materia.getCodigo() + " fue modificada con éxito";
+			exito = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			mensaje = e.getMessage();
+			e.printStackTrace();
+		}
+		model.addAttribute("materias", CollectionMateria.getMaterias());
+		model.addAttribute("titulo", "Materias");
+		model.addAttribute("exito", exito);
+		model.addAttribute("mensaje", mensaje);
+		return "materias";
 	}
 	
 	@GetMapping("/eliminar/{codigo}")
