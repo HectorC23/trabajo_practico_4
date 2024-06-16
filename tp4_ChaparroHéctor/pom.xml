@@ -49,10 +49,11 @@
 		    <artifactId>webjars-locator</artifactId>
 		    <version>0.52</version>
 		</dependency>
+		<!-- https://projectlombok.org/setup/maven -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<!--<version>1.18.32</version> -->
+			<version>1.18.32</version><!--$NO-MVN-MAN-VER$-->
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
