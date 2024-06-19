@@ -63,9 +63,10 @@ public class CollectionAlumno {
 	 */
 	public static void updateAlumno(Alumno alumno)throws Exception {
 		boolean encontrado = false;
+		alumnos = getAlumnos();
 		try {
 			for(Alumno a: alumnos) {
-				if(a.getDni().equals(alumno.getDni())) {
+				if(a.getDni().equals( (alumno.getDni() ))) {
 					a.setNombre(alumno.getNombre());
 					a.setApellido(alumno.getApellido());
 					a.setEmail(alumno.getEmail());
@@ -78,10 +79,12 @@ public class CollectionAlumno {
 					encontrado= true;
 					break;
 				}
-				if (!encontrado) {
-					throw new Exception ("El alumno con DNI " + alumno.getDni() + " no existe");
-				}
-			} 
+				
+			}
+			if (!encontrado) {
+				
+				throw new Exception ("El alumno con DNI " + alumno.getDni() + " no existe");
+			}
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			throw e;
